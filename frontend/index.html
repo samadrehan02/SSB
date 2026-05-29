@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSB Interview Prep</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">★</div>
+      <div>
+        <h1>SSB Prep</h1>
+        <p>Live voice interview simulator</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="themeBtn" class="icon-btn" aria-label="Toggle theme">◐</button>
+      <button id="newSessionBtn" class="primary-btn">New Session</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar card">
+      <h2>Mode</h2>
+      <div class="stack">
+        <button class="mode-btn active" data-mode="personal">Personal Interview</button>
+        <button class="mode-btn" data-mode="gd">GD / Lecturette</button>
+        <button class="mode-btn" data-mode="psych">Psych Prep</button>
+      </div>
+
+      <h2>Voice</h2>
+      <div class="stack small-gap">
+        <label class="toggle-row"><span>TTS</span><input type="checkbox" id="ttsToggle" checked /></label>
+        <label class="toggle-row"><span>Auto-listen</span><input type="checkbox" id="autoListenToggle" /></label>
+      </div>
+
+      <h2>Connection</h2>
+      <div class="mono-box" id="wsInfo">Not connected</div>
+    </aside>
+
+    <section class="chat-shell">
+      <div class="statusbar card">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusText">Starting…</span>
+        <span class="spacer"></span>
+        <span id="sessionLabel">Session: —</span>
+      </div>
+
+      <div id="chat" class="chat card">
+        <div class="empty-state" id="emptyState">
+          <h2>Ready for your SSB?</h2>
+          <p>Click the mic and speak. Your words will appear live, and the interviewer will respond over WebSocket.</p>
+        </div>
+      </div>
+
+      <div class="controls card">
+        <div id="waveform" class="waveform"></div>
+        <div class="control-row">
+          <button id="micBtn" class="mic-btn" aria-label="Start microphone">🎙</button>
+          <button id="stopBtn" class="secondary-btn">Stop</button>
+          <button id="sendBtn" class="primary-btn">Send current transcript</button>
+        </div>
+        <p class="hint" id="hintText">Click the mic to begin speaking.</p>
+      </div>
+    </section>
+
+    <aside class="panel card">
+      <h2>Stats</h2>
+      <div class="stat"><span>Turns</span><strong id="turnCount">0</strong></div>
+      <div class="stat"><span>Mode</span><strong id="modeLabel">Personal Interview</strong></div>
+
+      <h2>OLQs</h2>
+      <div class="tags" id="olqTags">
+        <span>Courage</span><span>Leadership</span><span>Integrity</span><span>Initiative</span>
+        <span>Reasoning</span><span>Confidence</span><span>Teamwork</span><span>Communication</span>
+      </div>
+
+      <h2>Endpoints</h2>
+      <ul class="endpoint-list">
+        <li>GET /</li>
+        <li>GET /health</li>
+        <li>POST /session</li>
+        <li>POST /session/{id}/reset</li>
+        <li>GET /session/{id}/history</li>
+        <li>POST /chat</li>
+        <li>WS /ws/{id}</li>
+      </ul>
+    </aside>
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+</html>
